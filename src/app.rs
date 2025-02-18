@@ -14,7 +14,7 @@ use imgui::*;
 use std::{
     collections::VecDeque,
     path::{Path, PathBuf},
-    process::Child,
+    process::{Child, Command},
     rc::Rc,
     sync::mpsc::TryRecvError,
     time::Duration,
@@ -585,6 +585,13 @@ impl App {
             if ui.menu_item_config("Copy Full Path").build() {
                 ui.set_clipboard_text(full_path.as_ref());
             }
+
+            if ui.menu_item_config("Open containing folder").build() {
+                let path = Path::new(full_path.as_ref());
+                let _ = Command::new("explorer").arg(path.parent().unwrap()).spawn();
+                // println!("hello world {}", out.unwrap().stdout);
+            }
+
         }
 
         stack.end();
