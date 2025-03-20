@@ -982,8 +982,8 @@ impl App {
                         );
 
                         if let Ok(mut command) = command {
-                            if let Ok(child) = command.spawn() {
-                                self.pending_command = Some(child);
+                            if let Ok(_child) = command.spawn() {
+                                // self.pending_command = Some(child);
                             } else {
                                 println!(
                                     "Failed to start editor '{:?}' with args '{:?}'",
